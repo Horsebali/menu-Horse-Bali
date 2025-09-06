@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Primera Página</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: #0074D9;
+            color: white;
+            padding: 1em 0;
+        }
+        main {
+            margin: 2em;
+        }
+        footer {
+            background: #333;
+            color: white;
+            padding: 1em 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Bienvenido a mi página</h1>
+    </header>
+
+    <main>
+        <h2>Hola Mundo 🌍</h2>
+        <p>Esta es mi primera página HTML estática.</p>
+        <button onclick="alert('¡Gracias por hacer clic!')">Haz clic aquí</button>
+    </main>
+
+    <footer>
+        <p>© 2025 - Mi primera web</p>
+    </footer>
+
+</body>
+</html>
