@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horse Valley</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fdf1e4;
+      color: #333;
+      text-align: center;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #ffffff;
+      color: #000000;
+    }
+
+    header img {
+      height: 60px;
+    }
+
+    .contacto a {
+      margin-left: 1rem;
+      color: black;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .bienvenida {
+      padding: 2rem 1rem;
+    }
+
+    .mapa {
+      margin: 2rem 0;
+    }
+
+    .mapa img {
+      width: 90%;
+      max-width: 800px;
+      border-radius: 10px;
+    }
+
+    .sucursales {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .sucursal a {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: #444;
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .sucursal a:hover {
+      background: #666;
+    }
+
+    footer {
+      background: #222;
+      color: #fff;
+      padding: 1rem;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    /* POPUP */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      overflow: auto;
+    }
+
+    .popup-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 95%;
+      max-width: 900px;
+      text-align: center;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #333;
+    }
+
+    /* CARRUSEL TIPO CARTAS */
+    .carousel-container {
+      display: flex;
+      align-items: center;
+      margin: 2rem 0;
+    }
+
+    .carousel-cards {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 1rem;
+      padding: 1rem 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .card {
+      flex: 0 0 250px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      text-align: center;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .carousel-btn {
+      background: #444;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      z-index: 10;
+    }
+
+    .carousel-btn:hover {
+      background: #666;
+    }
+
+    .carousel-btn.prev {
+      margin-right: 10px;
+    }
+
+    .carousel-btn.next {
+      margin-left: 10px;
+    }
+
+    /* ZOOM SOBRE CARTA */
+    .zoom-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .zoom-content {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+    }
+
+    .zoom-content img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .zoom-content .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="logohb.jpg" alt="Horse Bali Logo">
+  <div class="contacto">
+    <a href="https://wa.me/XXXXXXXXXXX" target="_blank">Whatsapp</a>
+    <a href="mailto:info.horsevalley.com">info.horsebali@gmail.com</a>
+  </div>
+</header>
+
+<section class="bienvenida">
+  <h1>Bienvenido a Horse Bali</h1>
+  <p>Menú de nuestras actividades y dónde encontrarnos</p>
+</section>
+
+<section class="mapa">
+  <img src="mapaBali.jpg" alt="Mapa Horse Bali">
+</section>
+
+<section class="sucursales">
+  <div class="sucursal">
+    <a href="#" onclick="openPopup('popupTabanan')">Horse Bali Tabanan</a>
+  </div>
+  <div class="sucursal">
+    <a href="#" onclick="openPopup('popupCandidasa')">Horse Bali Candidasa</a>
+  </div>
+</section>
+
+<!-- POPUP CANDIDASA -->
+<div id="popupCandidasa" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('popupCandidasa')">&times;</span>
+    <h2>Horse Bali Candidasa</h2>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" onclick="scrollCarousel('candidasa', -1)">⟨</button>
+      <div class="carousel-cards" id="candidasa">
+        <div class="card" onclick="openZoom(this,'zoomCandidasa')">
+          <img src="beach1.jpg" alt="Beach Ride">
+          <h3>Beach Ride</h3>
+          <p>Disfruta de un paseo al amanecer</p>
+          <p><strong>$50</strong></p>
+        </div>
+        <div class="card" onclick="openZoom(this,'zoomCandidasa')">
+          <img src="jungle.jpg" alt="Jungle Ride">
+          <h3>Jungle Ride</h3>
+          <p>Explora la selva de Bali</p>
+          <p><strong>$60</strong></p>
+        </div>
+        <div class="card" onclick="openZoom(this,'zoomCandidasa')">
+          <img src="trekingsun.jpg" alt="Trekking Sunset">
+          <h3>Trekking Sunset</h3>
+          <p>Caminata al atardecer</p>
+          <p><strong>$55</strong></p>
+        </div>
+        <div class="card" onclick="openZoom(this,'zoomCandidasa')">
+          <img src="sunset.jpg" alt="Trekking Sunrise">
+          <h3>Trekking Sunrise</h3>
+          <p>Caminata al amanecer</p>
+          <p><strong>$55</strong></p>
+        </div>
+      </div>
+      <button class="carousel-btn next" onclick="scrollCarousel('candidasa', 1)">⟩</button>
+    </div>
+
+    <!-- Overlay zoom Candidasa -->
+    <div class="zoom-overlay" id="zoomCandidasa">
+      <div class="zoom-content">
+        <span class="close" onclick="closeZoom('zoomCandidasa')">&times;</span>
+        <div id="zoomCardContentCandidasa"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- POPUP TABANAN -->
+<div id="popupTabanan" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('popupTabanan')">&times;</span>
+    <h2>Horse Bali Tabanan</h2>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" onclick="scrollCarousel('tabanan', -1)">⟨</button>
+      <div class="carousel-cards" id="tabanan">
+        <div class="card" onclick="openZoom(this,'zoomTabanan')">
+          <img src="beach-ride.jpg" alt="Beach Ride">
+          <h3>Beach Ride</h3>
+          <p>Montar en la playa de Tabanan</p>
+          <p><strong>$45</strong></p>
+        </div>
+        <div class="card" onclick="openZoom(this,'zoomTabanan')">
+          <img src="jungle-ride.jpg" alt="Jungle Ride">
+          <h3>Jungle Ride</h3>
+          <p>Aventura en la jungla</p>
+          <p><strong>$55</strong></p>
+        </div>
+        <div class="card" onclick="openZoom(this,'zoomTabanan')">
+          <img src="trekking-sunrise.jpg" alt="Trekking Sunrise">
+          <h3>Trekking Sunrise</h3>
+          <p>Ruta al amanecer</p>
+          <p><strong>$50</strong></p>
+        </div>
+      </div>
+      <button class="carousel-btn next" onclick="scrollCarousel('tabanan', 1)">⟩</button>
+    </div>
+
+    <!-- Overlay zoom Tabanan -->
+    <div class="zoom-overlay" id="zoomTabanan">
+      <div class="zoom-content">
+        <span class="close" onclick="closeZoom('zoomTabanan')">&times;</span>
+        <div id="zoomCardContentTabanan"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 Horse Bali. Todos los derechos reservados.
+</footer>
+
+<script>
+  function openPopup(id) {
+    document.getElementById(id).style.display = "flex";
+  }
+
+  function closePopup(id) {
+    document.getElementById(id).style.display = "none";
+  }
+
+  function scrollCarousel(id, direction) {
+    const container = document.getElementById(id);
+    const cardWidth = container.querySelector('.card').offsetWidth + 16; // gap
+    container.scrollBy({
+      left: direction * cardWidth,
+      behavior: 'smooth'
+    });
+  }
+
+  function openZoom(card, zoomId) {
+    const zoomOverlay = document.getElementById(zoomId);
+    const zoomContentDiv = zoomOverlay.querySelector('div[id^="zoomCardContent"]');
+    zoomContentDiv.innerHTML = card.innerHTML;
+    zoomOverlay.style.display = 'flex';
+  }
+
+  function closeZoom(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
