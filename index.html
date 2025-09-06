@@ -15,17 +15,20 @@
     }
 
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: #ffffff;
-      color: #000000;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff; /* blanco */
+  color: #000000; 
+  width: 100%;
+  box-sizing: border-box;
+}
 
-    header img {
-      height: 60px;
-    }
+header img {
+  height: 60px;
+  display: block;  /* asegura que no se “centra” por text-align del body */
+}
 
     .contacto a {
       margin-left: 1rem;
